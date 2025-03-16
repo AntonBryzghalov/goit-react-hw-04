@@ -1,14 +1,17 @@
 import ClipLoader from "react-spinners/ClipLoader";
+import css from "./loader.module.css";
 
 function Loader() {
   return (
-    <ClipLoader
-      color="#0f0"
-      loading={true}
-      size={90}
-      aria-label="Loading Spinner"
-      data-testid="loader"
-    />
+    <div className={css.loader}>
+      <ClipLoader
+        color="#000"
+        loading={true}
+        size={70}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </div>
   );
 }
 

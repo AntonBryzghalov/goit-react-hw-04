@@ -1,7 +1,13 @@
+import css from "./ImageCard.module.css";
+
 function ImageCard({ image }) {
   return (
-    <div>
-      <img src={image.urls["thumb"]} alt={image.description} />
+    <div className={css.container}>
+      <img
+        className={css.thumb}
+        src={image.urls["small"]}
+        alt={image.description}
+      />
     </div>
   );
 }

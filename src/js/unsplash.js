@@ -8,12 +8,18 @@ const unsplashAPI = axios.create({
   },
 });
 
-export async function fetchImages(query, page, per_page = 10) {
+export async function fetchImages(
+  query,
+  page,
+  per_page = 10,
+  orientation = "landscape"
+) {
   const response = await unsplashAPI.get("/search/photos", {
     params: {
       query,
       page,
       per_page,
+      orientation,
     },
   });
   return response.data;
