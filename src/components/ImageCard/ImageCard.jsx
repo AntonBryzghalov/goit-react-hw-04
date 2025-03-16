@@ -1,12 +1,12 @@
 import css from "./ImageCard.module.css";
 
-function ImageCard({ image }) {
+function ImageCard({ image, openImage, index }) {
   return (
-    <div className={css.container}>
+    <div className={css.container} onClick={() => openImage(index)}>
       <img
         className={css.thumb}
         src={image.urls["small"]}
-        alt={image.description}
+        alt={image.alt_description}
       />
     </div>
   );
