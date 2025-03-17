@@ -1,5 +1,5 @@
 import ClipLoader from "react-spinners/ClipLoader";
-import css from "./loader.module.css";
+import css from "./Loader.module.css";
 
 function Loader() {
   return (

@@ -5,6 +5,9 @@ import { capitalizeFirstLetter } from "../../js/utils";
 Modal.setAppElement("#root");
 
 const customStyles = {
+  overlay: {
+    backgroundColor: "#555e",
+  },
   content: {
     top: "50%",
     left: "50%",

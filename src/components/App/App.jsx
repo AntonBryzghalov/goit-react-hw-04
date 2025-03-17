@@ -18,10 +18,10 @@ function App() {
   const [error, setError] = useState(null);
 
   function onSubmit(query) {
-    if (query.length === 0) {
-      setError("Please write something to search!");
+    if (!query || query.length === 0) {
       return;
     }
+
     setSearchQuery(query);
     setImages([]);
     setPage(1);
