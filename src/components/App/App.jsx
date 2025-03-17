@@ -5,6 +5,7 @@ import Loader from "../Loader/Loader";
 import { fetchImages } from "../../js/unsplash";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "../ImageModal/ImageModal";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 function App() {
   const totalPagesRef = useRef(0);
@@ -14,9 +15,13 @@ function App() {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [imageIndex, setImageIndex] = useState(-1);
+  const [error, setError] = useState(null);
 
   function onSubmit(query) {
-    if (query.length === 0) return;
+    if (query.length === 0) {
+      setError("Please write something to search!");
+      return;
+    }
     setSearchQuery(query);
     setImages([]);
     setPage(1);
@@ -32,14 +37,13 @@ function App() {
       if (searchQuery.length === 0) return;
 
       setIsLoading(true);
+      setError(null);
       try {
         const response = await fetchImages(searchQuery, page);
         setImages((prevImages) => [...prevImages, ...response.results]);
         totalPagesRef.current = response.total_pages;
-        //console.log(response);
-      } catch (error) {
-        // Show error here
-        console.log(error);
+      } catch {
+        setError("Something went wrong. Try to refresh the page");
       } finally {
         setIsLoading(false);
       }
@@ -51,7 +55,8 @@ function App() {
   return (
     <>
       <SearchBar onSubmit={onSubmit} />
-      {totalPagesRef.current > 0 && (
+      {error && <ErrorMessage error={error} />}
+      {!error && totalPagesRef.current > 0 && (
         <ImageGallery images={images} openImage={openImage} />
       )}
       {isLoading && <Loader />}
